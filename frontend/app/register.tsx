@@ -3,6 +3,7 @@ import React, { useContext, useState } from "react";
 import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 import { AuthContext } from "../context/AuthContext";
 import ErrorMessage from "@/components/ErrorMessage";
+import Title from "@/components/Title";
 
 export default function Register() {
   const { register } = useContext(AuthContext);
@@ -22,7 +23,7 @@ export default function Register() {
 
   return (
     <View style={style.container}>
-      <Text style={style.title}>Register</Text>
+      <Title title="Register"/>
       <TextInput
         placeholder="Username"
         value={username}

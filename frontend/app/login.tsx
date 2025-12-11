@@ -3,6 +3,7 @@ import React, { useContext, useState } from "react";
 import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 import { AuthContext } from "../context/AuthContext";
 import ErrorMessage from "@/components/ErrorMessage";
+import Title from "@/components/Title";
 
 export default function Login() {
   const router = useRouter();
@@ -22,7 +23,7 @@ export default function Login() {
 
   return (
     <View style={style.container}>
-      <Text style={style.title}>Login</Text>
+      <Title title="Login" />
       <TextInput
         placeholder="Username"
         value={username}
@@ -45,13 +46,6 @@ export default function Login() {
 
 const style = StyleSheet.create({
   container: { flex: 1, justifyContent: "center", padding: 20 },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    letterSpacing: 1,
-    textAlign: "center",
-    marginBottom: 20,
-  },
   input: {
     marginBottom: 10,
     padding: 8,
