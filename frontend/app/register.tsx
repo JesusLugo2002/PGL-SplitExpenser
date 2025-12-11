@@ -1,7 +1,8 @@
 import { useRouter } from "expo-router";
 import React, { useContext, useState } from "react";
-import { Button, Text, TextInput, View } from "react-native";
+import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 import { AuthContext } from "../context/AuthContext";
+import ErrorMessage from "@/components/ErrorMessage";
 
 export default function Register() {
   const { register } = useContext(AuthContext);
@@ -10,33 +11,57 @@ export default function Register() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleRegister = async () => {
+  async function handleRegister() {
     const res = await register(username, password);
     if (res.ok) {
       router.replace("/login");
     } else {
       setError(res.msg || "Error al registrar");
     }
-  };
+  }
 
   return (
-    <View style={{ flex: 1, justifyContent: "center", padding: 20 }}>
+    <View style={style.container}>
+      <Text style={style.title}>Register</Text>
       <TextInput
-        placeholder="Usuario"
+        placeholder="Username"
         value={username}
         onChangeText={setUsername}
-        style={{ borderWidth: 1, marginBottom: 10, padding: 8 }}
+        style={style.input}
       />
       <TextInput
-        placeholder="Contraseña"
+        placeholder="Password"
         value={password}
         onChangeText={setPassword}
         secureTextEntry
-        style={{ borderWidth: 1, marginBottom: 10, padding: 8 }}
+        style={style.input}
       />
-      {error ? <Text style={{ color: "red" }}>{error}</Text> : null}
-      <Button title="Registrar" onPress={handleRegister} />
-      <Button title="Volver al login" onPress={() => router.push("/login")} />
+      {error ? <ErrorMessage message={error} /> : null}
+      <Button title="Create account" onPress={handleRegister} />
+      <Text onPress={() => router.push("/login")} style={style.secondaryButton}>
+        Have account? Back to login!
+      </Text>
     </View>
   );
 }
+
+const style = StyleSheet.create({
+  container: { flex: 1, justifyContent: "center", padding: 20 },
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    letterSpacing: 1,
+    textAlign: "center",
+    marginBottom: 20,
+  },
+  input: {
+    marginBottom: 10,
+    padding: 8,
+  },
+  secondaryButton: {
+    color: "blue",
+    textDecorationLine: "underline",
+    textAlign: "center",
+    marginTop: 10,
+  },
+});

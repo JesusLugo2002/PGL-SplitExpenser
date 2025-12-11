@@ -6,13 +6,13 @@ import { AuthContext } from "../context/AuthContext";
 export default function Home() {
   const { token, logout } = useContext(AuthContext);
   const router = useRouter();
-  const [groups, setGroups] = useState(["Grupo1", "Grupo2"]);
+  const [groups, ] = useState(["Grupo1", "Grupo2"]);
 
   useEffect(() => {
     if (!token) {
       setTimeout(() => router.replace("/login"), 0);
     }
-  }, [token]);
+  }, [router, token]);
 
   if (!token) return null;
 
