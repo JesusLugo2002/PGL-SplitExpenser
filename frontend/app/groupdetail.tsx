@@ -3,7 +3,7 @@ import React, { createRef, useContext, useState } from "react";
 import { Button, Text, TextInput, View, Alert, Modal } from "react-native";
 import { AuthContext } from "../context/AuthContext";
 
-export default function Login() {
+export default function GroupDetail() {
   const { login, token } = useContext(AuthContext);
   const [currentExpenseId, setCurrentExpenseId] = useState<string|null>(null);
   const [newAmount, setNewAmount] = useState("0");
